@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team | Wall-ECE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-cyan: #052428;
+            --dark-teal: #006064;
+            --dark-text: #1a1a1a;
+            --light-bg: #f5f5f5;
+            --accent-orange: #ff6b35;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+        }
+
+        /* NAVIGATION */
+        nav {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark-teal);
+        }
+
+        .logo span {
+            color: var(--primary-cyan);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--primary-cyan);
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-cyan) 0%, #0097a7 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        /* CONTENT */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .intro-text {
+            text-align: center;
+            font-size: 1.05rem;
+            color: #555;
+            margin-bottom: 60px;
+            line-height: 1.8;
+        }
+
+        /* TEAM MEMBER HORIZONTAL BARS */
+        .team-member-bar {
+            background: white;
+            border-left: 4px solid var(--primary-cyan);
+            padding: 50px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            display: grid;
+            grid-template-columns: 140px 180px 360px 280px; /* Adjusted first column for wider images */
+            gap: 30px;
+            align-items: center;
+            min-height: 140px;
+        }
+
+        .team-member-bar:hover {
+            box-shadow: 0 8px 24px rgba(0,188,212,0.15);
+            transform: translateX(4px);
+        }
+
+        .member-photo {
+            width: 140px; /* Made significantly wider */
+            height: auto; /* Allows the image to dictate its own natural height */
+            background: #e0e0e0; /* Fallback background if image is transparent */
+            border-radius: 8px; /* Slightly softer corners instead of aggressive crop */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            grid-row: 1 / 3;
+            overflow: hidden; 
+        }
+
+        /* Images will now scale naturally without getting chopped off */
+        .member-photo img {
+            width: 100%;
+            height: auto; 
+            display: block;
+        }
+
+        .member-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark-teal);
+            margin-bottom: 8px;
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .member-role {
+            color: var(--primary-cyan);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        .member-major {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            grid-column: 2;
+            grid-row: 2;
+            align-self: end;
+        }
+
+        .member-bio {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            grid-column: 3;
+            grid-row: 1 / 3;
+            align-self: center;
+        }
+
+        .member-fun-fact {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #555;
+            font-style: italic;
+            border-left: 3px solid var(--dark-text);
+            grid-column: 4;
+            grid-row: 1 / 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 80px;
+        }
+
+        /* ADVISOR SECTION */
+        .advisor-section {
+            background: #f0f9fa;
+            border: 2px solid var(--primary-cyan);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .advisor-section h2 {
+            color: var(--dark-teal);
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .advisor-profile {
+            display: flex;
+            align-items: flex-start; /* Aligns photo to the top of the text */
+            justify-content: center;
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .advisor-photo {
+            width: 250px; /* Much larger photo */
+            height: auto; /* Natural height */
+            flex-shrink: 0;
+            border-radius: 8px; /* Standard rounded rectangle, not a circle */
+            border: 4px solid var(--primary-cyan);
+            overflow: hidden;
+            background: white;
+        }
+
+        .advisor-photo img {
+            width: 100%;
+            height: auto; /* Natural proportions */
+            display: block;
+        }
+
+        .advisor-info {
+            display: inline-block;
+            text-align: left;
+            flex: 1; /* Allows text to fill remaining space beautifully */
+        }
+
+        .advisor-info h3 {
+            font-size: 1.3rem;
+            color: var(--primary-cyan);
+            margin-bottom: 10px;
+        }
+
+        .advisor-info p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .site-footer {
+            background: #00bbcf;
+            color: black;
+            padding: 1.5rem 1.5rem;
+        }
+
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 1.5rem;
+            padding: 20px;
+            border-top: 2px solid #ccc;
+            flex-wrap: wrap;
+        }
+
+        .footer-logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .team-member-bar {
+                grid-template-columns: 120px 1fr 1fr; /* Adjusted for wider image */
+                gap: 20px;
+                min-height: auto;
+            }
+
+            .member-photo {
+                width: 120px;
+                grid-row: 1 / 4;
+            }
+
+            .member-name {
+                grid-column: 2 / 4;
+                grid-row: 1;
+            }
+
+            .member-role {
+                grid-column: 2;
+                grid-row: 2;
+            }
+
+            .member-major {
+                grid-column: 3;
+                grid-row: 2;
+            }
+
+            .member-bio {
+                grid-column: 2 / 4;
+                grid-row: 3;
+            }
+
+            .member-fun-fact {
+                grid-column: 2 / 4;
+                grid-row: 4;
+                min-height: auto;
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .team-member-bar {
+                grid-template-columns: 100px 1fr; /* Adjusted for wider image */
+                gap: 15px;
+                padding: 20px;
+                margin-bottom: 15px;
+                min-height: auto;
+            }
+
+            .member-photo {
+                width: 100px;
+                grid-row: 1 / 4;
+                grid-column: 1;
+            }
+
+            .member-name {
+                font-size: 1.1rem;
+                grid-column: 2;
+                grid-row: 1;
+            }
+
+            .member-role {
+                grid-column: 2;
+                grid-row: 2;
+            }
+
+            .member-major {
+                grid-column: 2;
+                grid-row: 2;
+                align-self: end;
+            }
+
+            .member-bio {
+                grid-column: 2;
+                grid-row: 3;
+                margin-top: 10px;
+            }
+
+            .member-fun-fact {
+                grid-column: 1 / 3;
+                grid-row: 4;
+                margin-top: 10px;
+                min-height: auto;
+                padding: 12px;
+            }
+
+            .advisor-profile {
+                flex-direction: column;
+                align-items: center; /* Center photo on mobile */
+                text-align: center;
+            }
+
+            .advisor-info {
+                text-align: center;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 20px;
+            }
+
+            nav a {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">WALL-<span>ECE</span></div>
+            <ul>
+                <li><a href="Wall-ECE.html">HOME</a></li>
+                <li><a href="about.html">ABOUT US</a></li>
+                <li><a href="team.html" class="active">TEAM</a></li>
+                <li><a href="Subsystems.html">SUBSYSTEMS</a></li>
+                <li><a href="gallery.html">GALLERY</a></li>
+                <!-- <li><a href="deliverables.html">DELIVERABLES</a></li> -->
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <h1>Meet Scrap Squad</h1>
+        <p>The Team Behind Wall-ECE</p>
+    </section>
+
+    <div class="content">
+
+        <p class="intro-text">
+            Scrap Squad is a dedicated group of Electrical and Computer Engineering students at Mississippi State University who combined their expertise in embedded systems, mechanical design, and software development to create Wall-ECE. Each team member brought unique skills and perspectives to solve complex engineering challenges.
+        </p>
+
+        <div class="team-member-bar">
+            <div class="member-photo">
+                <img src="Oshiv.png" alt="Oshiv Yuvaraj">
+            </div>
+            <div>
+                <div class="member-name">Oshiv Yuvaraj</div>
+                <div class="member-role">Team Lead • Duck Wrangling</div>
+                <div class="member-major">Electrical Engineering</div>
+            </div>
+            <div class="member-bio">Oshiv led the team through the project lifecycle, coordinating between subsystems and ensuring smooth integration. His focus was on the duck wrangling system—designing the mechanism to reliably capture and transport rubber ducks.</div>
+            <div class="member-fun-fact">🏅 Passionate about robotics competitions and autonomous systems</div>
+        </div>
+
+        <div class="team-member-bar">
+            <div class="member-photo">
+                <img src="Dexter.jpg" alt="Dexter Fason">
+            </div>
+            <div>
+                <div class="member-name">Dexter Fason</div>
+                <div class="member-role">Project Manager • Locomotion</div>
+                <div class="member-major">Computer Engineering</div>
+            </div>
+            <div class="member-bio">As PM, Dexter managed schedules and deliverables while spearheading the locomotion subsystem. He designed Wall-ECE's omnidirectional movement using Mecanum wheels, solving the tight-space navigation challenges.</div>
+            <div class="member-fun-fact">⚡ Expert in motor control and dynamic systems</div>
+        </div>
+
+        <div class="team-member-bar">
+            <div class="member-photo">
+                <img src="Cade.jpg" alt="Cade Teeple">
+            </div>
+            <div>
+                <div class="member-name">Cade Teeple</div>
+                <div class="member-role">Chip Handling Specialist</div>
+                <div class="member-major">Electrical Engineering</div>
+            </div>
+            <div class="member-bio">Cade engineered the chip handling subsystem, implementing the servo-driven sorting mechanism that separates colored chips with 90%+ accuracy. His mechanical designs were crucial to maximizing space efficiency.</div>
+            <div class="member-fun-fact">🎯 Master of precision mechanical design in constrained spaces</div>
+        </div>
+
+        <div class="team-member-bar">
+            <div class="member-photo">
+                <img src="Millicent.jpg" alt="Millicent Steadman">
+            </div>
+            <div>
+                <div class="member-name">Millicent Steadman</div>
+                <div class="member-role">Sensing Systems Engineer</div>
+                <div class="member-major">Computer Engineering</div>
+            </div>
+            <div class="member-bio">Millicent developed the sensing subsystem, integrating color sensors, time-of-flight distance detection, and gyroscopes. Her work on sensor calibration and data fusion was critical to Wall-ECE's autonomous perception.</div>
+            <div class="member-fun-fact">🔍 Specializes in sensor fusion and embedded signal processing</div>
+        </div>
+
+        <div class="team-member-bar">
+            <div class="member-photo">
+                <img src="Seth.png" alt="Seth Aultman">
+            </div>
+            <div>
+                <div class="member-name">Seth Aultman</div>
+                <div class="member-role">Pedestal Stacking Engineer</div>
+                <div class="member-major">Electrical Engineering</div>
+            </div>
+            <div class="member-bio">Seth designed and implemented the pedestal stacking subsystem, which identifies colored pedestals and places them in the correct order. His work on servo control and placement accuracy was essential to competition success.</div>
+            <div class="member-fun-fact">🏗️ Expert in precision positioning and mechanical timing</div>
+        </div>
+
+        <div class="advisor-section">
+            <h2>Faculty Advisor</h2>
+            <div class="advisor-profile">
+                <div class="advisor-photo">
+                    <img src="Benji.jpg" alt="Benjamin Wilkinson">
+                </div>
+                <div class="advisor-info">
+                    <h3>Benjamin Wilkinson</h3>
+                    <p>A PHD student of the Electrical and Computer Engineering at Mississippi State University. Future Doctor Benjamin Wilkinson provided technical guidance, mentorship, and invaluable expertise throughout the Wall-ECE project. His background in embedded systems and robotics helped the team navigate complex engineering challenges.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div>
+                <div class="footer-logo">
+                <div class = "logo">WALL-<span>ECE</span></div>
+            </div>
+                <p>Mississippi State University Senior Design Project</p>
+            </div>
+            <div>
+                <p>&copy; 2026 Wall-ECE</p>
+                <p>Designed for a professional engineering project showcase.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
